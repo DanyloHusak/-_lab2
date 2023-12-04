@@ -1,0 +1,27 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.interpolate import lagrange
+
+# Задана таблиця значень функції корисності
+utility = np.array([0.14, 0.55, 0.66, 0.73, 0.78, 0.83, 0.87, 0.93, 0.98])
+money = np.array([-3000, -1000, 0, 1000, 2000, 3000, 4000, 6000, 8000])
+
+# Створення полінома Лагранжа для функції корисності
+poly = lagrange(money, utility)
+
+# Побудова графіка функції корисності та поліному Лагранжа
+plt.figure(figsize=(8, 6))
+plt.plot(money, utility, marker='o', linestyle='-', color='b', label='Функція корисності')
+plt.xlabel('Гроші')
+plt.ylabel('Корисність')
+plt.title('Функція корисності та поліном Лагранжа')
+plt.grid(True)
+
+# Визначення значень для побудови поліному Лагранжа
+x_values = np.linspace(min(money), max(money), 1000)
+y_values = poly(x_values)
+
+# Побудова поліному Лагранжа
+plt.plot(x_values, y_values, color='r', label='Поліном Лагранжа')
+plt.legend()
+plt.show()
